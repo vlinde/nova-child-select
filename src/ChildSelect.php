@@ -3,6 +3,7 @@
 namespace Alvinhu\ChildSelect;
 
 use Laravel\Nova\Fields\Field;
+use Vlinde\NovaPageBuilder\Models\VldBlockTemplate;
 
 class ChildSelect extends Field
 {
@@ -19,13 +20,13 @@ class ChildSelect extends Field
 
     public function getOptions($parameters = [])
     {
-        $options = call_user_func($this->options, $parameters);
+        $options = VldBlockTemplate::where('vld_template_id', $parameters)->get();
 
         $result = [];
         foreach ($options as $key => $option) {
             $result[] = [
-                'label' => $option,
-                'value' => $key,
+                'label' => $option->name,
+                'value' => $option->id,
             ];
         }
 
