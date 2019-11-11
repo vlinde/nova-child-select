@@ -29,7 +29,7 @@ class FieldServiceProvider extends ServiceProvider
 
         Route::middleware(['nova'])
             ->prefix('nova-vendor/child-select')
-            ->namespace('Alvinhu\ChildSelect')
+            ->namespace('Vlinde\ChildSelect')
             ->group(__DIR__.'/../routes/api.php');
     }
 
