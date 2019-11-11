@@ -9,7 +9,7 @@ class ChildSelect extends Field
 {
     public $component = 'child-select';
 
-    protected $options;
+    protected $options, $model;
 
     public function options($options)
     {
@@ -18,9 +18,16 @@ class ChildSelect extends Field
         return $this;
     }
 
+    public function model($model) {
+        $this->model = $model;
+
+        return $this;
+    }
+
     public function getOptions($parameters = [])
     {
-        $options = VldBlockTemplate::where('vld_template_id', $parameters)->get();
+
+        $options = $this->model::where('vld_template_id', $parameters)->get();
 
         $result = [];
         foreach ($options as $key => $option) {
