@@ -12,13 +12,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Alvinhu\\ChildSelect\\": "src/"
+            "Vlinde\\ChildSelect\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Alvinhu\\ChildSelect\\FieldServiceProvider"
+                "Vlinde\\ChildSelect\\FieldServiceProvider"
             ]
         }
     },

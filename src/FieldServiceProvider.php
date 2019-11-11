@@ -1,6 +1,6 @@
 <?php
 
-namespace Alvinhu\ChildSelect;
+namespace Vlinde\ChildSelect;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;

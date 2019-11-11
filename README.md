@@ -9,7 +9,7 @@ But instead of providing api endpoint, you can fill options by a closure functio
 
 ### Install
 ```
-composer require alvinhu/nova-child-select
+composer require vlinde/nova-child-select
 ```
 
 ### Usage
@@ -21,7 +21,7 @@ Class have 2 special methods on top of default Select from Laravel Nova.
 ### Example
 
 ```
-use Alvinhu\ChildSelect\ChildSelect;
+use Vlinde\ChildSelect\ChildSelect;
 
 public function fields(Request $request)
     {
@@ -30,18 +30,15 @@ public function fields(Request $request)
             ID::make()->sortable(),
 
             Select::make('Country')
-                ->options(Country::all()->mapWithKeys(function ($country) {
-                    return [$country->id => $country->name];
-                }))
+                ->options(Country::all()->pluck('id','name')
                 ->rules('required'),
 
             ChildSelect::make('City')
                 ->parent('country')
                 ->options(function ($value) { 
-                    City::whereCountry($value)->get()->mapWithKeys(function ($city) {
-                        return [$city->id => $city->name];
-                    });
+                    City::whereCountry($value)->get()->pluck('id','name')
                 })
+                ->model(City::class)
                 ->rules('required'),
         ];
     }

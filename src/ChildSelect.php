@@ -1,6 +1,6 @@
 <?php
 
-namespace Alvinhu\ChildSelect;
+namespace Vlinde\ChildSelect;
 
 use Laravel\Nova\Fields\Field;
 use Vlinde\NovaPageBuilder\Models\VldBlockTemplate;
@@ -9,7 +9,7 @@ class ChildSelect extends Field
 {
     public $component = 'child-select';
 
-    protected $options, $model;
+    protected $options, $model, $column;
 
     public function options($options)
     {
@@ -27,7 +27,7 @@ class ChildSelect extends Field
     public function getOptions($parameters = [])
     {
 
-        $options = $this->model::where('vld_template_id', $parameters)->get();
+        $options = $this->model::where($this->column, $parameters)->get();
 
         $result = [];
         foreach ($options as $key => $option) {
@@ -42,6 +42,7 @@ class ChildSelect extends Field
 
     public function parent($attribute)
     {
+        $this->column = $attribute;
         $this->withMeta(['parentAttribute' => $attribute]);
         return $this;
     }
